@@ -9,6 +9,7 @@ setuptools.setup(
     author_email='fabian@hammerle.me',
     url='https://github.com/fphammerle/acpi-backlight',
     packages=['acpi_backlight'],
+    scripts=['acpi-backlight-eval'],
     setup_requires=['setuptools_scm'],
     tests_require=['pytest'],
     classifiers=[
