@@ -10,6 +10,7 @@ setuptools.setup(
     url='https://github.com/fphammerle/acpi-backlight',
     packages=['acpi_backlight'],
     setup_requires=['setuptools_scm'],
+    tests_require=['pytest'],
     classifiers=[
         "License :: OSI Approved :: MIT License",
         "Operating System :: POSIX :: Linux",
