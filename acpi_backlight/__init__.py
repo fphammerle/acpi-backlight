@@ -1,6 +1,9 @@
 # pylint: disable=missing-docstring
 
+import argparse
 import os
+
+import acpi_backlight.evaluate
 
 _ACPI_BACKLIGHT_ROOT_DIR_PATH = '/sys/class/backlight'
 
@@ -40,4 +43,23 @@ class Backlight:
     @brightness_relative.setter
     def brightness_relative(self, brightness_relative):
         self._brightness_absolute = max(0, min(1, brightness_relative)) \
-                                    * self._max_brightness_absolute
+            * self._max_brightness_absolute
+
+
+def backlight_eval(expr_str):
+    backlight = acpi_backlight.Backlight()
+    backlight.brightness_relative = acpi_backlight.evaluate.evaluate_expression(
+        expr_str=expr_str,
+        names={'b': backlight.brightness_relative},
+    )
+    print(backlight.brightness_relative)
+
+
+def main():
+    argparser = argparse.ArgumentParser()
+    argparser.add_argument('expr_str')
+    args = argparser.parse_args()
+    backlight_eval(expr_str=args.expr_str)
+
+if __name__ == '__main__':
+    main()
