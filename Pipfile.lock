@@ -1,0 +1,25 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "c4f8864211a861964c75492b78ec43f314408a256bd72396edfd729814621aea"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "python_version": "3.6"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "acpi-backlight": {
+            "editable": true,
+            "path": "."
+        }
+    },
+    "develop": {}
+}
