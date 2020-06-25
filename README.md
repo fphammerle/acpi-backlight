@@ -1,5 +1,7 @@
 # acpi-backlight
 
+[![CI Pipeline Status](https://github.com/fphammerle/acpi-backlight/workflows/tests/badge.svg)](https://github.com/fphammerle/acpi-backlight/actions)
+
 ## setup
 
 ```sh
