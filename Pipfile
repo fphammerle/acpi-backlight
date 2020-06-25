@@ -7,6 +7,4 @@ name = "pypi"
 acpi-backlight = {editable = true, path = "."}
 
 [dev-packages]
-
-[requires]
-python_version = "3.6"
+pytest = "*"
