@@ -9,6 +9,8 @@ acpi-backlight = {editable = true, path = "."}
 [dev-packages]
 pytest = "*"
 
+# workaround https://github.com/pytest-dev/pytest/issues/3953
+pathlib2 = {version = "*", markers="python_version < '3.6'"}
 # zipp v2.0.0 dropped support for python3.5
 # https://github.com/jaraco/zipp/commit/05a3c52b4d41690e0471a2e283cffb500dc0329a
 zipp = "<2"
