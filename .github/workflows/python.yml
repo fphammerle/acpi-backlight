@@ -49,6 +49,7 @@ jobs:
         PYTHON_VERSION: ${{ matrix.python-version }}
     - run: pipenv graph
     - run: pipenv run pytest --cov=acpi_backlight --cov-report=term-missing --cov-fail-under=64
+    - run: pipenv run mypy acpi_backlight tests
     # >=1.9.0 to detect branch name
     # https://github.com/coveralls-clients/coveralls-python/pull/207
     # https://github.com/coverallsapp/github-action/issues/4#issuecomment-547036866
