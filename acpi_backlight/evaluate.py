@@ -31,5 +31,5 @@ def _evaluate(node, names):
 
 
 def evaluate_expression(expr_str, names):
-    expr = ast.parse(expr_str, mode='eval')
+    expr = ast.parse(expr_str, mode="eval")
     return _evaluate(expr.body, names=names)

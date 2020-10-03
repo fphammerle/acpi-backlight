@@ -1,5 +1,6 @@
 # acpi-backlight
 
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![CI Pipeline Status](https://github.com/fphammerle/acpi-backlight/workflows/tests/badge.svg)](https://github.com/fphammerle/acpi-backlight/actions)
 
 ## setup
