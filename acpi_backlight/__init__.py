@@ -12,44 +12,44 @@ class Backlight:
 
     # pylint: disable=too-few-public-methods; does not count properties
 
-    def __init__(self, name="intel_backlight"):
+    def __init__(self, name: str = "intel_backlight"):
         self._acpi_dir_path = os.path.join(_ACPI_BACKLIGHT_ROOT_DIR_PATH, name)
 
     @property
-    def _brightness_path(self):
+    def _brightness_path(self) -> str:
         return os.path.join(self._acpi_dir_path, "brightness")
 
     @property
-    def _max_brightness_path(self):
+    def _max_brightness_path(self) -> str:
         return os.path.join(self._acpi_dir_path, "max_brightness")
 
     @property
-    def _brightness_absolute(self):
+    def _brightness_absolute(self) -> int:
         with open(self._brightness_path, "r") as brightness_file:
             return int(brightness_file.read())
 
     @_brightness_absolute.setter
-    def _brightness_absolute(self, brightness_absolute):
+    def _brightness_absolute(self, brightness_absolute: int):
         with open(self._brightness_path, "w") as brightness_file:
-            return brightness_file.write(str(round(brightness_absolute)))
+            return brightness_file.write(str(brightness_absolute))
 
     @property
-    def _max_brightness_absolute(self):
+    def _max_brightness_absolute(self) -> int:
         with open(self._max_brightness_path, "r") as max_brightness_file:
             return int(max_brightness_file.read())
 
     @property
-    def brightness_relative(self):
+    def brightness_relative(self) -> float:
         return self._brightness_absolute / self._max_brightness_absolute
 
     @brightness_relative.setter
-    def brightness_relative(self, brightness_relative):
-        self._brightness_absolute = (
+    def brightness_relative(self, brightness_relative: float) -> None:
+        self._brightness_absolute = round(
             max(0, min(1, brightness_relative)) * self._max_brightness_absolute
         )
 
 
-def backlight_eval(expr_str):
+def backlight_eval(expr_str: str) -> None:
     backlight = acpi_backlight.Backlight()
     backlight.brightness_relative = acpi_backlight.evaluate.evaluate_expression(
         expr_str=expr_str, names={"b": backlight.brightness_relative}
@@ -57,7 +57,7 @@ def backlight_eval(expr_str):
     print(backlight.brightness_relative)
 
 
-def main():
+def main() -> None:
     argparser = argparse.ArgumentParser()
     argparser.add_argument("expr_str")
     args = argparser.parse_args()
