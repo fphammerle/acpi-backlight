@@ -18,6 +18,10 @@ pathlib2 = {version = "*", markers="python_version < '3.6'"}
 # https://github.com/jaraco/zipp/commit/05a3c52b4d41690e0471a2e283cffb500dc0329a
 zipp = "<2"
 
+# python<3.8 compatibility
+# workaround https://github.com/pytest-dev/pytest/issues/7273
+importlib_metadata = {markers = "python_version < '3.8'"}
+
 [requires]
 python_version = "3"
 
