@@ -11,18 +11,17 @@ acpi-backlight = {editable = true, path = "."}
 # https://github.com/psf/black/commit/e74117f172e29e8a980e2c9de929ad50d3769150#diff-2eeaed663bd0d25b7e608891384b7298R51
 black = {version = "==20.8b1", markers = "python_version >= '3.6'"}
 mypy = "*"
+pylint = "*"
+pylint-import-requirements = "*"
 pytest = "*"
 pytest-cov = "*"
 
 # python3.5 compatibility
+isort = "<5"
 # workaround https://github.com/pytest-dev/pytest/issues/3953
 pathlib2 = {version = "*", markers="python_version < '3.6'"}
 # https://github.com/jaraco/zipp/commit/05a3c52b4d41690e0471a2e283cffb500dc0329a
 zipp = "<2"
-
-# python<3.8 compatibility
-# workaround https://github.com/pytest-dev/pytest/issues/7273
-importlib_metadata = {markers = "python_version < '3.8'"}
 
 [requires]
 python_version = "3"

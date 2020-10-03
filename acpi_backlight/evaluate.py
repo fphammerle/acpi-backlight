@@ -17,17 +17,16 @@ _OPERATORS = {
 def _evaluate(node, names):
     if isinstance(node, ast.Num):
         return node.n
-    elif isinstance(node, ast.Name):
+    if isinstance(node, ast.Name):
         return names[node.id]
-    elif isinstance(node, ast.UnaryOp):
+    if isinstance(node, ast.UnaryOp):
         operand = _evaluate(node.operand, names=names)
         return _OPERATORS[type(node.op)](operand)
-    elif isinstance(node, ast.BinOp):
+    if isinstance(node, ast.BinOp):
         operand_left = _evaluate(node.left, names=names)
         operand_right = _evaluate(node.right, names=names)
         return _OPERATORS[type(node.op)](operand_left, operand_right)
-    else:
-        raise Exception(node)
+    raise Exception(node)
 
 
 def evaluate_expression(expr_str, names):

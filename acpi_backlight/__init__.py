@@ -9,6 +9,9 @@ _ACPI_BACKLIGHT_ROOT_DIR_PATH = "/sys/class/backlight"
 
 
 class Backlight:
+
+    # pylint: disable=too-few-public-methods; does not count properties
+
     def __init__(self, name="intel_backlight"):
         self._acpi_dir_path = os.path.join(_ACPI_BACKLIGHT_ROOT_DIR_PATH, name)
 
@@ -49,8 +52,7 @@ class Backlight:
 def backlight_eval(expr_str):
     backlight = acpi_backlight.Backlight()
     backlight.brightness_relative = acpi_backlight.evaluate.evaluate_expression(
-        expr_str=expr_str,
-        names={"b": backlight.brightness_relative},
+        expr_str=expr_str, names={"b": backlight.brightness_relative}
     )
     print(backlight.brightness_relative)
 
