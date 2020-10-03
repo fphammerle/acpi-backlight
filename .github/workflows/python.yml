@@ -48,7 +48,7 @@ jobs:
       env:
         PYTHON_VERSION: ${{ matrix.python-version }}
     - run: pipenv graph
-    - run: pipenv run pytest --cov=acpi_backlight --cov-report=term-missing --cov-fail-under=80
+    - run: pipenv run pytest --cov=acpi_backlight --cov-report=term-missing --cov-fail-under=90
     - run: pipenv run pylint --load-plugins=pylint_import_requirements acpi_backlight
     # https://github.com/PyCQA/pylint/issues/352
     - run: pipenv run pylint tests/*
