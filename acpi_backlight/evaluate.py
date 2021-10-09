@@ -1,5 +1,3 @@
-# pylint: disable=missing-docstring
-
 import ast
 import operator as python_operator
 

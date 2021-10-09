@@ -1,11 +1,9 @@
-# pylint: disable=missing-docstring
-
 import argparse
-import os
+import pathlib
 
 import acpi_backlight.evaluate
 
-_ACPI_BACKLIGHT_ROOT_DIR_PATH = "/sys/class/backlight"
+_ACPI_BACKLIGHT_ROOT_DIR_PATH = pathlib.Path("/sys/class/backlight")
 
 
 class Backlight:
@@ -13,30 +11,27 @@ class Backlight:
     # pylint: disable=too-few-public-methods; does not count properties
 
     def __init__(self, name: str = "intel_backlight"):
-        self._acpi_dir_path = os.path.join(_ACPI_BACKLIGHT_ROOT_DIR_PATH, name)
+        self._acpi_dir_path = _ACPI_BACKLIGHT_ROOT_DIR_PATH.joinpath(name)
 
     @property
-    def _brightness_path(self) -> str:
-        return os.path.join(self._acpi_dir_path, "brightness")
+    def _brightness_path(self) -> pathlib.Path:
+        return self._acpi_dir_path.joinpath("brightness")
 
     @property
-    def _max_brightness_path(self) -> str:
-        return os.path.join(self._acpi_dir_path, "max_brightness")
+    def _max_brightness_path(self) -> pathlib.Path:
+        return self._acpi_dir_path.joinpath("max_brightness")
 
     @property
     def _brightness_absolute(self) -> int:
-        with open(self._brightness_path, "r") as brightness_file:
-            return int(brightness_file.read())
+        return int(self._brightness_path.read_text(encoding="ascii"))
 
     @_brightness_absolute.setter
     def _brightness_absolute(self, brightness_absolute: int):
-        with open(self._brightness_path, "w") as brightness_file:
-            return brightness_file.write(str(brightness_absolute))
+        self._brightness_path.write_text(str(brightness_absolute))
 
     @property
     def _max_brightness_absolute(self) -> int:
-        with open(self._max_brightness_path, "r") as max_brightness_file:
-            return int(max_brightness_file.read())
+        return int(self._max_brightness_path.read_text())
 
     @property
     def brightness_relative(self) -> float:

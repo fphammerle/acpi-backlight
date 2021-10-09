@@ -1,3 +1,4 @@
+import pathlib
 import unittest.mock
 
 import pytest
@@ -10,13 +11,13 @@ from acpi_backlight import Backlight, backlight_eval
 
 def test_init_default():
     backlight = Backlight()
-    assert backlight._acpi_dir_path == "/sys/class/backlight/intel_backlight"
+    assert backlight._acpi_dir_path.as_posix() == "/sys/class/backlight/intel_backlight"
 
 
 @pytest.mark.parametrize("name", ["intel_backlight", "other"])
 def test_init(name):
     backlight = Backlight(name=name)
-    assert backlight._acpi_dir_path == "/sys/class/backlight/{}".format(name)
+    assert backlight._acpi_dir_path.as_posix() == "/sys/class/backlight/" + name
 
 
 @pytest.mark.parametrize(
@@ -30,10 +31,13 @@ def test_init(name):
     ),
 )
 def test_brightness_relative_get(
-    tmp_path, max_brightness, brightness_absolute_str, expected_brightness_relative
+    tmp_path: pathlib.Path,
+    max_brightness,
+    brightness_absolute_str,
+    expected_brightness_relative,
 ):
     backlight = Backlight()
-    backlight._acpi_dir_path = str(tmp_path)
+    backlight._acpi_dir_path = tmp_path
     tmp_path.joinpath("brightness").write_text(brightness_absolute_str)
     tmp_path.joinpath("max_brightness").write_text(str(max_brightness))
     assert backlight.brightness_relative == pytest.approx(expected_brightness_relative)
@@ -52,10 +56,13 @@ def test_brightness_relative_get(
     ),
 )
 def test_brightness_relative_set(
-    tmp_path, max_brightness, brightness_relative, expected_brightness_abs_str
+    tmp_path: pathlib.Path,
+    max_brightness,
+    brightness_relative,
+    expected_brightness_abs_str,
 ):
     backlight = Backlight()
-    backlight._acpi_dir_path = str(tmp_path)
+    backlight._acpi_dir_path = tmp_path
     tmp_path.joinpath("max_brightness").write_text(str(max_brightness))
     backlight.brightness_relative = brightness_relative
     assert tmp_path.joinpath("brightness").read_text() == expected_brightness_abs_str
