@@ -11,7 +11,7 @@ setuptools.setup(
     packages=["acpi_backlight"],
     entry_points={
         "console_scripts": [
-            "acpi-backlight-eval=acpi_backlight:main",
+            "acpi-backlight-eval=acpi_backlight:_main",
         ]
     },
     classifiers=[

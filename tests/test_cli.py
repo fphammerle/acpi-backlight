@@ -5,6 +5,8 @@ import pytest
 
 import acpi_backlight
 
+# pylint: disable=protected-access; tests
+
 
 @pytest.mark.parametrize(
     ("expr_str", "brightness"),
@@ -25,5 +27,5 @@ def test_main(tmp_path: pathlib.Path, expr_str: str, brightness: str):
     with unittest.mock.patch("sys.argv", ["", expr_str]), unittest.mock.patch(
         "acpi_backlight._ACPI_BACKLIGHT_ROOT_DIR_PATH", tmp_path
     ):
-        acpi_backlight.main()
+        acpi_backlight._main()
     assert acpi_dir_path.joinpath("brightness").read_text() == brightness

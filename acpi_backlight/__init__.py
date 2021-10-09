@@ -52,12 +52,8 @@ def backlight_eval(expr_str: str) -> None:
     print(backlight.brightness_relative)
 
 
-def main() -> None:
+def _main() -> None:
     argparser = argparse.ArgumentParser()
     argparser.add_argument("expr_str")
     args = argparser.parse_args()
     backlight_eval(expr_str=args.expr_str)
-
-
-if __name__ == "__main__":
-    main()
