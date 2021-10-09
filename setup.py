@@ -14,17 +14,19 @@ setuptools.setup(
             "acpi-backlight-eval=acpi_backlight:main",
         ]
     },
-    setup_requires=["setuptools_scm"],
-    tests_require=["pytest"],
     classifiers=[
         "License :: OSI Approved :: MIT License",
         "Operating System :: POSIX :: Linux",
         # .github/workflows/python.yml
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Topic :: Utilities",
     ],
+    python_requires=">=3.6",  # <3.6 untested
+    install_requires=[],
+    setup_requires=["setuptools_scm"],
+    tests_require=["pytest"],
 )

@@ -27,11 +27,11 @@ class Backlight:
 
     @_brightness_absolute.setter
     def _brightness_absolute(self, brightness_absolute: int):
-        self._brightness_path.write_text(str(brightness_absolute))
+        self._brightness_path.write_text(str(brightness_absolute), encoding="ascii")
 
     @property
     def _max_brightness_absolute(self) -> int:
-        return int(self._max_brightness_path.read_text())
+        return int(self._max_brightness_path.read_text(encoding="ascii"))
 
     @property
     def brightness_relative(self) -> float:
