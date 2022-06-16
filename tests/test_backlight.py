@@ -1,5 +1,6 @@
 import pathlib
 import unittest.mock
+import re
 
 import pytest
 
@@ -18,6 +19,28 @@ def test_init_default():
 def test_init(name):
     backlight = Backlight(name=name)
     assert backlight._acpi_dir_path.as_posix() == "/sys/class/backlight/" + name
+
+
+def test__brightness_absolute_set_permission_denied() -> None:
+    backlight = Backlight()
+    with unittest.mock.patch(
+        "pathlib.Path.open",
+        side_effect=PermissionError(
+            "[Errno 13] Permission denied:"
+            " '/sys/class/backlight/intel_backlight/brightness'"
+        ),
+    ), pytest.raises(
+        PermissionError,
+        match=re.escape(
+            "Insufficient permissions to set brightness of backlight."
+            "\nConsider adding the following udev rules:"
+            '\nACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight"'
+            ', RUN+="/bin/chgrp video /sys$devpath/brightness"'
+            '\nACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight"'
+            ', RUN+="/bin/chmod g+w /sys$devpath/brightness"'
+        ),
+    ):
+        backlight._brightness_absolute = 42
 
 
 @pytest.mark.parametrize(

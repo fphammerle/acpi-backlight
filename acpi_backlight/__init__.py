@@ -11,6 +11,7 @@ class Backlight:
     # pylint: disable=too-few-public-methods; does not count properties
 
     def __init__(self, name: str = "intel_backlight"):
+        self._device_name = name
         self._acpi_dir_path = _ACPI_BACKLIGHT_ROOT_DIR_PATH.joinpath(name)
 
     @property
@@ -27,7 +28,19 @@ class Backlight:
 
     @_brightness_absolute.setter
     def _brightness_absolute(self, brightness_absolute: int):
-        self._brightness_path.write_text(str(brightness_absolute), encoding="ascii")
+        try:
+            self._brightness_path.write_text(str(brightness_absolute), encoding="ascii")
+        except PermissionError as exc:
+            raise PermissionError(
+                "Insufficient permissions to set brightness of backlight."
+                "\nConsider adding the following udev rules:"
+                f'\nACTION=="add", SUBSYSTEM=="backlight"'
+                f', KERNEL=="{self._device_name}"'
+                f', RUN+="/bin/chgrp video /sys$devpath/brightness"'
+                f'\nACTION=="add", SUBSYSTEM=="backlight"'
+                f', KERNEL=="{self._device_name}"'
+                f', RUN+="/bin/chmod g+w /sys$devpath/brightness"'
+            ) from exc
 
     @property
     def _max_brightness_absolute(self) -> int:
