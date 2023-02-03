@@ -1,6 +1,6 @@
 import pytest
 
-from acpi_backlight.evaluate import evaluate_expression
+from acpi_backlight._evaluate import evaluate_expression
 
 
 @pytest.mark.parametrize(
