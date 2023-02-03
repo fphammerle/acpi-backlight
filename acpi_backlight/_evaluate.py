@@ -24,7 +24,7 @@ def _evaluate(node, names):
         operand_left = _evaluate(node.left, names=names)
         operand_right = _evaluate(node.right, names=names)
         return _OPERATORS[type(node.op)](operand_left, operand_right)
-    raise Exception(node)
+    raise ValueError(node)
 
 
 def evaluate_expression(expr_str, names):

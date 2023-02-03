@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - made module `acpi_backlight.evaluate` private
+- `acpi_backlight.backlight_eval`: raise `ValueError` instead of `Exception`
+  when expression contains prohibited specifier or operator
 
 TODO document commits before 2022-06-16
 
