@@ -1,7 +1,7 @@
 import argparse
 import pathlib
 
-import acpi_backlight.evaluate
+import acpi_backlight._evaluate
 
 _ACPI_BACKLIGHT_ROOT_DIR_PATH = pathlib.Path("/sys/class/backlight")
 
@@ -59,7 +59,8 @@ class Backlight:
 
 def backlight_eval(expr_str: str) -> None:
     backlight = acpi_backlight.Backlight()
-    backlight.brightness_relative = acpi_backlight.evaluate.evaluate_expression(
+    # pylint: disable=protected-access; internal module
+    backlight.brightness_relative = acpi_backlight._evaluate.evaluate_expression(
         expr_str=expr_str, names={"b": backlight.brightness_relative}
     )
     print(backlight.brightness_relative)

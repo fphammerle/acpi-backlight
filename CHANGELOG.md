@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - suggest udev rules when permissions are insufficient to set backlight's brightness
 
+### Changed
+- made module `acpi_backlight.evaluate` private
+- `acpi_backlight.backlight_eval`: raise `ValueError` instead of `Exception`
+  when expression contains prohibited specifier or operator
+
 TODO document commits before 2022-06-16
 
 [Unreleased]: https://github.com/fphammerle/acpi-backlight/compare/0.2.0...HEAD
