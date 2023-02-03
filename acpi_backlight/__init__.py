@@ -7,7 +7,6 @@ _ACPI_BACKLIGHT_ROOT_DIR_PATH = pathlib.Path("/sys/class/backlight")
 
 
 class Backlight:
-
     # pylint: disable=too-few-public-methods; does not count properties
 
     def __init__(self, name: str = "intel_backlight"):
