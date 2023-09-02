@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `acpi_backlight.backlight_eval`: raise `ValueError` instead of `Exception`
   when expression contains prohibited specifier or operator
 
+### Removed
+- compatibility with `python3.7`
+
 TODO document commits before 2022-06-16
 
 [Unreleased]: https://github.com/fphammerle/acpi-backlight/compare/0.2.0...HEAD
