@@ -10,7 +10,6 @@ acpi-backlight = {editable = true, path = "."}
 black = "*"
 mypy = "*"
 pylint = "*"
-pylint-import-requirements = "*"
 pytest = "*"
 pytest-cov = "*"
 
