@@ -23,7 +23,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3.10",
         "Topic :: Utilities",
     ],
-    python_requires=">=3.7",  # <3.8 untested
+    python_requires=">=3.8",  # <3.8 untested
     install_requires=[],
     setup_requires=["setuptools_scm"],
     tests_require=["pytest"],
