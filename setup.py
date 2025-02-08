@@ -1,4 +1,4 @@
-""" python setup script """
+"""python setup script"""
 
 import setuptools
 
